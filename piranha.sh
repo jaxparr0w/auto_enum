@@ -19,13 +19,13 @@ nmap -v -sC -sV --script=*vuln* -oA vuln $1
 if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
     echo "## HTTP Found Running Nikto & WFuzz...##" >> log
-    nikto h $1
+    nikto -h $1 | tee niktoscan
     wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://$1/?FUZZ | tee wfuzzscan
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
     echo "## HTTP Found Running Nikto & WFuzz...##" >> log
-    nikto h $1 | tee niktoscan
+    nikto -h $1 | tee niktoscan
     wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://$1/?FUZZ | tee wfuzzscan
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
