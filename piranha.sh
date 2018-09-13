@@ -41,9 +41,9 @@ fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
     echo "{-- HTTP Found Running Nikto & WFuzz... --}" >> log
-    dirb http://$1 /usr/share/wordlists/dirb/common.txt | tee dirblist
-    nikto -h $1 | tee niktoscan
-    wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://$1/FUZZ | tee wfuzzscan
+    dirb http://$1:8080 /usr/share/wordlists/dirb/common.txt | tee dirblist
+    nikto -h $1:8080 | tee niktoscan
+    wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://$1:8080/FUZZ | tee wfuzzscan
 fi
 
 
