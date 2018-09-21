@@ -33,22 +33,25 @@ fi
 # If 80 or 8080 is open, run nikto and dirb
 if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
-    echo "{-- HTTP Found Running Nikto & WFuzz... --}" >> log
+    echo "{-- HTTP Found Running Nikto & GoBuster... --}" >> log
     nikto -h $1 | tee niktoscan
-    dirb http://$1 /usr/share/wordlists/dirb/common.txt | tee dirblist
-    wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://$1/FUZZ | tee wfuzzscan
+    gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
-    echo "{-- HTTP Found Running Nikto & WFuzz... --}" >> log
-    dirb http://$1:8080 /usr/share/wordlists/dirb/common.txt | tee dirblist
+    echo "{-- HTTP Found Running Nikto & GoBuster... --}" >> log
     nikto -h $1:8080 | tee niktoscan
-    wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://$1:8080/FUZZ | tee wfuzzscan
+    gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1:8080 -o gobustlist.txt
 fi
-
+if [[ -n $(grep "443/open" intense.gnmap) ]]
+then
+    echo "{-- HTTPS Found Running Nikto & Gobuster... --}" >> log
+    nikto -h -ssl $1 | tee niktoscan
+    gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k
+fi
 
 echo " "
 echo "{-- Running full TCP scan... --}" >> log
 echo " "
 # Run full TCP scan
-nmap -v -p 1-65355 -oA fullTCP $1
+nmap -v -p 1-65355 -T4 -oA fullTCP $1
