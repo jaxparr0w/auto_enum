@@ -35,19 +35,19 @@ if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
     echo "{-- HTTP Found Running Nikto & GoBuster... --}" >> log
     nikto -h $1 | tee niktoscan
-    gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt
+    gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
     echo "{-- HTTP Found Running Nikto & GoBuster... --}" >> log
     nikto -h $1:8080 | tee niktoscan
-    gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1:8080 -o gobustlist.txt
+    gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k-u http://$1:8080 -o gobustlist.txt
 fi
 if [[ -n $(grep "443/open" intense.gnmap) ]]
 then
     echo "{-- HTTPS Found Running Nikto & Gobuster... --}" >> log
     nikto -h -ssl $1 | tee niktoscan
-    gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k
+    gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt -k
 fi
 
 echo " "
