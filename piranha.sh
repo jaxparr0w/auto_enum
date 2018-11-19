@@ -2,7 +2,8 @@
 # Piranha  :: Initial Enumeration Script
 # Author: jaxparr0w 
 # v2 :: 11/19/2018
-# Dependencies: nmap, nikto, enum4linux, gobuster, onesixtyone
+# Dependencies: nmap, nikto, enum4linux, gobuster, onesixtyone, crackmapexec
+# Basically an updted rolling Kali image
 
 echo "                                                              "
 echo "  ██▓███   ██▓ ██▀███   ▄▄▄       ███▄    █  ██░ ██  ▄▄▄      "
