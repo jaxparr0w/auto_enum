@@ -66,13 +66,22 @@ then
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
 then
-    echo "{-- SNMP Found, Runing OneSixtyOne... --}" >> log
+    echo "[ ] SNMP Found, Runing OneSixtyOne" >> log
     onesixtyone $1 -o snmpscan
     zenity --info --text="$1 OneSixtyOne Complete"
 fi
-
+if [[ -n $(grep "21/open" intense.gnmap) ]]
+then    
+    variable=$(zenity --entry --text="FTP found. Do you want to brute force (yes or no)?")
+        if [ $variable == "yes" ]
+        then
+            #do some ftp brute here
+        else
+            zenity --info --text="Okay, no cream!"
+        fi
+fi
 echo " "
-echo "{-- Running full TCP scan... --}" >> log
+echo "[ ] Running full TCP scan" >> log
 echo " "
 # Run full TCP scan
 nmap -v -p 1-65355 -T4 -oA fullTCP $1
