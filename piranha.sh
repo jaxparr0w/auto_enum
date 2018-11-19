@@ -4,7 +4,7 @@ echo " "
 echo "{-- Running Intense scan... --}" >> log
 echo " "
 # Run Intense scan 
-nmap -v -A -oA intense $1
+nmap -v -A -sU -oA intense $1
 
 echo " "
 echo "[-- Running Vuln scan... --}" >> log
@@ -21,7 +21,7 @@ searchsploit --nmap intense.xml | tee sploitlist
 # if 139 open, run enum4linux
 if [[ -n $(grep "139/open" intense.gnmap) ]]
 then
-    echo "{-- SMB Found Running Enum4Linux... --}" >> log
+    echo "{-- NetBios Found Running Enum4Linux... --}" >> log
     enum4linux -a $1 | tee enum4linuxscan  
 fi
 if [[ -n $(grep "445/open" intense.gnmap) ]]
@@ -30,7 +30,7 @@ then
     enum4linux -a $1 | tee enum4linuxscan  
 fi
 
-# If 80 or 8080 is open, run nikto and dirb
+# If 80 or 8080 is open, run nikto and gobuster
 if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
     echo "{-- HTTP Found Running Nikto & GoBuster... --}" >> log
@@ -48,6 +48,11 @@ then
     echo "{-- HTTPS Found Running Nikto & Gobuster... --}" >> log
     nikto -h -ssl $1 | tee niktoscan
     gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt -k
+fi
+if [[ -n $(grep "161/open" intense.gnmap) ]]
+then
+    echo "{-- SNMP Found, Runing OneSixtyOne... --}" >> log
+    onesixtyone $1 -o snmpscan
 fi
 
 echo " "
