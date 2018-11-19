@@ -1,4 +1,8 @@
 #!/bin/bash
+# Piranha  :: Initial Enumeration Script
+# Author: jaxparr0w 
+# v2 :: 11/19/2018
+# Dependencies: nmap, nikto, enum4linux, gobuster, onesixtyone
 
 echo " "
 echo "[ ] Running Intense scan" >> log
