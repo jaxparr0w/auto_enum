@@ -9,13 +9,13 @@ echo "  ██▓███   ██▓ ██▀███   ▄▄▄       █�
 echo " ▓██░  ██▒▓██▒▓██ ▒ ██▒▒████▄     ██ ▀█   █ ▓██░ ██▒▒████▄    "
 echo " ▓██░ ██▓▒▒██▒▓██ ░▄█ ▒▒██  ▀█▄  ▓██  ▀█ ██▒▒██▀▀██░▒██  ▀█▄  "
 echo " ▒██▄█▓▒ ▒░██░▒██▀▀█▄  ░██▄▄▄▄██ ▓██▒  ▐▌██▒░▓█ ░██ ░██▄▄▄▄██ "
-echo"  ▒██▒ ░  ░░██░░██▓ ▒██▒ ▓█   ▓██▒▒██░   ▓██░░▓█▒░██▓ ▓█   ▓██▒"
+echo " ▒██▒ ░  ░░██░░██▓ ▒██▒ ▓█   ▓██▒▒██░   ▓██░░▓█▒░██▓ ▓█   ▓██▒"
 echo " ▒▓▒░ ░  ░░▓  ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▒░   ▒ ▒  ▒ ░░▒░▒ ▒▒   ▓▒█░"
 echo " ░▒ ░      ▒ ░  ░▒ ░ ▒░  ▒   ▒▒ ░░ ░░   ░ ▒░ ▒ ░▒░ ░  ▒   ▒▒ ░"
 echo " ░░        ▒ ░  ░░   ░   ░   ▒      ░   ░ ░  ░  ░░ ░  ░   ▒   "
 echo "           ░     ░           ░  ░         ░  ░  ░  ░      ░  ░"
                                                          
-echo "▓█  ▒  ░   Enumerting the target, one byte at a time   ░  ▒ █▓
+echo "▓█  ▒  ░   Enumerating the target, one byte at a time  ░  ▒ █▓"
 echo "██  ▒  ░   TARGET : $1 "                   
 
 echo " "
@@ -24,6 +24,7 @@ echo " "
 # Run Intense scan 
 nmap -v -A -sU -sT -oA intense $1
 zenity --info --text="$1 Intense Scan Complete"
+echo "▓█ Intense scan complete" >> log
 
 echo " "
 echo "▓█ Running Vuln scan" >> log
@@ -31,6 +32,7 @@ echo " "
 # Run Vuln scan 
 nmap -v -sC -sV --script=*vuln* -oA vuln $1
 zenity --info --text="$1 Nmap vuln Scan Complete"
+echo "▓█ Vuln scan complete" >> log
 
 echo " "
 echo "▓█ Running Searchsploit" >> log
@@ -38,6 +40,7 @@ echo " "
 # Check sploitsearch
 searchsploit --nmap intense.xml | tee sploitlist
 zenity --info --text="$1 Searchsploit Complete"
+echo "▓█ Searchsploit Complete" >> log
 
 # if 139 open, run enum4linux
 if [[ -n $(grep "139/open" intense.gnmap) ]]
@@ -45,14 +48,18 @@ then
     echo "▓█ NetBios Found Running Enum4Linux" >> log
     enum4linux -a $1 | tee enum4linuxscan 
     zenity --info --text="$1 Enum4Linix Complete"
+    echo "▓█ Enum4Linux complete" >> lo
 fi
 if [[ -n $(grep "445/open" intense.gnmap) ]]
 then
     echo "▓█ SMB Found Running Enum4Linux" >> log
     enum4linux -a $1 | tee enum4linuxscan 
     zenity --info --text="$1 Enum4Linix Complete"
+    echo "▓█ Enum4Linux complete" >> log
     echo "▓█ SMB Found Running CrackMapExec" >> log
-    crackmapexec smb $1
+    crackmapexec smb $1 -u '' -p '' >> crackmapexec_smb
+    zenity --info --text="$1 CrackmapExec SMB Complete"
+    echo "▓█ CrackmapExec SMB Complete" >> log
 fi
 
 # If 80 or 8080 is open, run nikto and gobuster
@@ -102,3 +109,4 @@ echo " "
 # Run full TCP scan
 nmap -v -p 1-65355 -T4 -oA fullTCP $1
 zenity --info --text="$1 Full TCP Scan Complete"
+echo "▓█ Full TCP scan complete" >> log
