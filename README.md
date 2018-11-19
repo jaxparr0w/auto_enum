@@ -13,6 +13,7 @@ A few tools that I created to assist in pentesting. Nothing fancy, just helps wi
            ░     ░           ░  ░         ░  ░  ░  ░      ░  ░
                                                          
 ▓█  ▒  ░   Enumerating the target, one byte at a time  ░  ▒ █▓
+
 ██  ▒  ░   TARGET : $1 "  
 
 Usage: ./piranha.sh <target IP>
