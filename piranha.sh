@@ -90,9 +90,11 @@ then
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
 then
-    echo "▓█ SNMP Found, Runing OneSixtyOne" >> log
-    onesixtyone $1 -o snmpscan
-    zenity --info --text="$1 OneSixtyOne Complete"
+    echo "▓█ SNMP Found, Runing Snmpwalk on Windows MIBs" >> log
+    snmpwalk -c public -v1 $1 1.3.6.1.4.1.77.1.2.25 >> snmpenum
+    snmpwalk -c public -v1 $1 1.3.6.1.2.1.25.4.2.1.2 >> snmpenum
+    snmpwalk -c public -v1 $1 1.3.6.1.2.1.6.13.1.3 >> snmpenum
+    zenity --info --text="$1 SNMPWalk Complete"
 fi
 if [[ -n $(grep "21/open" intense.gnmap) ]]
 then    
