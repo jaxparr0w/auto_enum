@@ -1,7 +1,7 @@
 #!/bin/bash
 # Piranha  :: Initial Enumeration Script
 # Author: jaxparr0w 
-# v2 :: 11/19/2018
+# v2 :: 11/23/2018
 # Dependencies: nmap, nikto, enum4linux, gobuster, onesixtyone, crackmapexec
 # Basically an updted rolling Kali image
 
@@ -69,7 +69,7 @@ then
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> log
     nikto -h $1 | tee niktoscan
     zenity --info --text="$1 Nikto Scan Complete"
-    gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt
+    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt
     zenity --info --text="$1 GoBuster Complete"
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
@@ -77,7 +77,7 @@ then
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> log
     nikto -h $1:8080 | tee niktoscan
     zenity --info --text="$1 Nikto Scan Complete"
-    gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k-u http://$1:8080 -o gobustlist.txt
+    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k-u http://$1:8080 -o gobustlist.txt
     zenity --info --text="$1 GoBuster Complete"
 fi
 if [[ -n $(grep "443/open" intense.gnmap) ]]
@@ -85,7 +85,7 @@ then
     echo "▓█ HTTPS Found Running Nikto & Gobuster" >> log
     nikto -h -ssl $1 | tee niktoscan
     zenity --info --text="$1 Nikto Scan Complete"
-    gobuster -w gobuster -w /usr/share/wordlist/dirbuster/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt -k
+    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt -k
     zenity --info --text="$1 GoBuster Complete"
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
