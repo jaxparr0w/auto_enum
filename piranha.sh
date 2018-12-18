@@ -24,7 +24,6 @@ echo "▓█ Running Intense scan" >> log
 echo " "
 # Run Intense scan 
 nmap -v -A -sU -sT -oA intense $1
-zenity --info --text="$1 Intense Scan Complete"
 echo "▓█ Intense scan complete" >> log
 
 echo " "
@@ -32,7 +31,6 @@ echo "▓█ Running Vuln scan" >> log
 echo " "
 # Run Vuln scan 
 nmap -v -sC -sV --script=*vuln* -oA vuln $1
-zenity --info --text="$1 Nmap vuln Scan Complete"
 echo "▓█ Vuln scan complete" >> log
 
 echo " "
@@ -40,7 +38,6 @@ echo "▓█ Running Searchsploit" >> log
 echo " "
 # Check sploitsearch
 searchsploit --nmap intense.xml | tee sploitlist
-zenity --info --text="$1 Searchsploit Complete"
 echo "▓█ Searchsploit Complete" >> log
 
 # if 139 open, run enum4linux
@@ -48,7 +45,6 @@ if [[ -n $(grep "139/open" intense.gnmap) ]]
 then
     echo "▓█ NetBios Found Running Enum4Linux" >> log
     enum4linux -a $1 | tee enum4linuxscan 
-    zenity --info --text="$1 Enum4Linix Complete"
     echo "▓█ Enum4Linux complete" >> lo
 fi
 if [[ -n $(grep "445/open" intense.gnmap) ]]
@@ -59,7 +55,6 @@ then
     echo "▓█ Enum4Linux complete" >> log
     echo "▓█ SMB Found Running CrackMapExec" >> log
     crackmapexec smb $1 -u '' -p '' >> crackmapexec_smb
-    zenity --info --text="$1 CrackmapExec SMB Complete"
     echo "▓█ CrackmapExec SMB Complete" >> log
 fi
 
@@ -68,25 +63,19 @@ if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> log
     nikto -h $1 | tee niktoscan
-    zenity --info --text="$1 Nikto Scan Complete"
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt
-    zenity --info --text="$1 GoBuster Complete"
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> log
     nikto -h $1:8080 | tee niktoscan
-    zenity --info --text="$1 Nikto Scan Complete"
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k-u http://$1:8080 -o gobustlist.txt
-    zenity --info --text="$1 GoBuster Complete"
 fi
 if [[ -n $(grep "443/open" intense.gnmap) ]]
 then
     echo "▓█ HTTPS Found Running Nikto & Gobuster" >> log
     nikto -h -ssl $1 | tee niktoscan
-    zenity --info --text="$1 Nikto Scan Complete"
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt -k
-    zenity --info --text="$1 GoBuster Complete"
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
 then
@@ -94,7 +83,6 @@ then
     snmpwalk -c public -v1 $1 1.3.6.1.4.1.77.1.2.25 >> snmpenum
     snmpwalk -c public -v1 $1 1.3.6.1.2.1.25.4.2.1.2 >> snmpenum
     snmpwalk -c public -v1 $1 1.3.6.1.2.1.6.13.1.3 >> snmpenum
-    zenity --info --text="$1 SNMPWalk Complete"
 fi
 if [[ -n $(grep "21/open" intense.gnmap) ]]
 then    
@@ -103,7 +91,7 @@ then
         then
             #do some ftp brute here
         else
-            zenity --info --text="Okay, no cream!"
+            
         fi
 fi
 echo " "
