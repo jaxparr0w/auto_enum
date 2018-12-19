@@ -19,7 +19,7 @@ Second Stage: Greps intense.xml output and runs other enumeration tools based on
 | nikto | 80, 8080, 443 | niktoscan |
 | snmpwalk | 161 | snmpenum | 
 
-Produces a log 
+Produces a log `plog` that shows status of each tool being run. Currently a serial process, iterates through each tool one at a time, plan to multithread in the future. 
   
 #jaxparr0w
 https://twitter.com/subnetbot
