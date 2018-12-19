@@ -7,7 +7,7 @@ A few tools that I created to assist in pentesting. Nothing fancy, just helps wi
 
 Usage: `./piranha.sh <target IP>`
 
-First Stage: Will run an initial nmap scan using intense scan "-A" in all formats. Outputs as intense.(nmap,gmap,xml)
+First Stage: Will run an initial nmap scan using intense scan "-A" in all formats (Enable OS detection, version detection, script scanning, and traceroute). Outputs as intense.(nmap,gmap,xml)
 
 Second Stage: Greps intense.xml output and runs other enumeration tools based on found open ports, produces reports in plaintext. 
 
