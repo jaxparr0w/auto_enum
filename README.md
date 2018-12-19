@@ -1,7 +1,8 @@
 
 PIRANHA.sh 
 
-A few tools that I created to assist in pentesting. Nothing fancy, just helps with my workflow. 
+A tool that performs intial enumeration of a target to assist in pentesting. Nothing fancy, just helps with my workflow. 
+Requires tools listed below installed, all tools default on Rolling Kali Linux. 
 
 ![My image](jaxparr0w.github.com/auto_enum/piranha.png)                     
 
