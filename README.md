@@ -9,17 +9,13 @@ First Stage: Will run an initial nmap scan using intense scan "-A" in all format
 
 Second Stage: Greps intense.xml output and runs other enumeration tools based on found open ports, produces reports in plaintext. 
 
-Current tools:
-
-  *enum4linux (137,445)
-  
-  *crackmapexec (445)
-  
-  -gobuster (80, 8080, 443)
-  
-  -nikto (80, 8080, 443)
-  
-  -onesixtyone (161)
+| Tool | Port Trigger | Output Report |
+|------------| ------------| -----------|
+| enum4linux | 137,445 | enum4linuxscan |
+| crackmapexec | 445 | crackmapexec_smb | 
+| gobuster | 80, 8080, 443 | gobustlist.txt |
+| nikto | 80, 8080, 443 | niktoscan |
+| snmpwalk | 161 | snmpenum | 
   
   
 #jaxparr0w
