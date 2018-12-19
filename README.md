@@ -1,18 +1,7 @@
 
 A few tools that I created to assist in pentesting. Nothing fancy, just helps with my workflow. 
 
-
-  ██▓███   ██▓ ██▀███   ▄▄▄       ███▄    █  ██░ ██  ▄▄▄                       
- ▓██░  ██▒▓██▒▓██ ▒ ██▒▒████▄     ██ ▀█   █ ▓██░ ██▒▒████▄                   
- ▓██░ ██▓▒▒██▒▓██ ░▄█ ▒▒██  ▀█▄  ▓██  ▀█ ██▒▒██▀▀██░▒██  ▀█▄                 
- ▒██▄█▓▒ ▒░██░▒██▀▀█▄  ░██▄▄▄▄██ ▓██▒  ▐▌██▒░▓█ ░██ ░██▄▄▄▄██                
- ▒██▒ ░  ░░██░░██▓ ▒██▒ ▓█   ▓██▒▒██░   ▓██░░▓█▒░██▓ ▓█   ▓██▒             
- ▒▓▒░ ░  ░░▓  ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ▒░   ▒ ▒  ▒ ░░▒░▒ ▒▒   ▓▒█░            
-                     
-                                                                              
-▓█  ▒  ░   Enumerating the target, one byte at a time  ░  ▒ █▓                 
-                                      
-██  ▒  ░   TARGET : $1 "                         
+![My image](jaxparr0w.github.com/auto_enum/piranha.png)                     
 
 Usage: ./piranha.sh <target IP>
 
@@ -33,6 +22,6 @@ Current tools:
   -onesixtyone (161)
   
   
-#jaxparr0w\n
+#jaxparr0w
 https://twitter.com/subnetbot
   
