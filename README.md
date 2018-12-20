@@ -12,6 +12,8 @@ First Stage: Will run an initial nmap scan using intense scan "-A" in all format
 
 Second Stage: Greps intense.xml output and runs other enumeration tools based on found open ports, produces reports in plaintext. 
 
+Current Tools incroporated and port that triggers the tool. Reports are automatically generated, tools run on screen as well. 
+
 | Tool | Port Trigger | Output Report |
 |------------| ------------| -----------|
 | enum4linux | 137,445 | enum4linuxscan |
