@@ -62,22 +62,28 @@ if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> plog
     nikto -h $1 | tee niktoscan
-    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt -k -u http://$1 -o gobustlist.txt
-    echo "▓█ GoBuster" complete >> plog
+    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt 
+    echo "▓█ GoBuster complete" >> plog
+    curl -v http://$1 >> sitecurl
+    echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> plog
     nikto -h $1:8080 | tee niktoscan
-    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist_8080.txt -k-u http://$1:8080 -o gobustlist.txt
+    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist_8080.txt 
     echo "▓█ GoBuster complete" >> plog
+    curl -v http://$1:8080 >> sitecurl
+    echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "443/open" intense.gnmap) ]]
 then
     echo "▓█ HTTPS Found Running Nikto & Gobuster" >> plog
     nikto -h -ssl $1 | tee niktoscan
-    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u https://$1 -o gobustlist_443.txt -k -u http://$1 -o gobustlist.txt -k
+    gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u https://$1 -o gobustlist_443.txt -k 
     echo "▓█ GoBuster complete" >> plog
+    curl -v -k http://$1 >> sitecurl
+    echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
 then
