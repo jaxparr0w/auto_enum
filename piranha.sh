@@ -98,9 +98,9 @@ fi
 #        fi
 #fi
 echo " "
-echo "▓█ Running full TCP scan" >> plog
+echo "▓█ Running full TCP & UDP scan" >> plog
 echo " "
 # Run full TCP scan
-nmap -v -p 1-65355 -T4 -oA fullTCP $1
-zenity --info --text="$1 Full TCP Scan Complete"
-echo "▓█ Full TCP scan complete" >> plog
+nmap -v -p 1-65355 -sV -T4 -sU -sT -oA fullTCP_UDP $1
+zenity --info --text="$1 Full TCP & UDP Scan Complete"
+echo "▓█ Full TCP & UDP scan complete" >> plog
