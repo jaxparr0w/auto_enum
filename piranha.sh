@@ -65,6 +65,7 @@ then
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt 
     echo "▓█ GoBuster complete" >> plog
     curl -v http://$1 >> sitecurl
+    curl -v http://$1/robots.txt >> robots.txt
     echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
@@ -74,6 +75,7 @@ then
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist_8080.txt 
     echo "▓█ GoBuster complete" >> plog
     curl -v http://$1:8080 >> sitecurl
+    curl -v http://$1:8080/robots.txt >> 8080robots.txt
     echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "443/open" intense.gnmap) ]]
@@ -82,7 +84,8 @@ then
     nikto -h -ssl $1 | tee niktoscan
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u https://$1 -o gobustlist_443.txt -k 
     echo "▓█ GoBuster complete" >> plog
-    curl -v -k http://$1 >> sitecurl
+    curl -v -k https://$1 >> 443sitecurl
+    curl -v -k https://$1/robots.txt >> 443robots.txt
     echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
