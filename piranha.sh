@@ -60,33 +60,33 @@ fi
 # If 80 or 8080 is open, run nikto and gobuster
 if [[ -n $(grep "80/open" intense.gnmap) ]]
 then
+    curl -v http://$1 >> sitecurl
+    curl -v http://$1/robots.txt >> robots.txt
+    echo "▓█ Curl complete" >> plog
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> plog
     nikto -h $1 | tee niktoscan
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist.txt 
     echo "▓█ GoBuster complete" >> plog
-    curl -v http://$1 >> sitecurl
-    curl -v http://$1/robots.txt >> robots.txt
-    echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "8080/open" intense.gnmap) ]]
 then
+    curl -v http://$1:8080 >> sitecurl
+    curl -v http://$1:8080/robots.txt >> 8080robots.txt
+    echo "▓█ Curl complete" >> plog
     echo "▓█ HTTP Found Running Nikto & GoBuster" >> plog
     nikto -h $1:8080 | tee niktoscan
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u http://$1 -o gobustlist_8080.txt 
     echo "▓█ GoBuster complete" >> plog
-    curl -v http://$1:8080 >> sitecurl
-    curl -v http://$1:8080/robots.txt >> 8080robots.txt
-    echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "443/open" intense.gnmap) ]]
 then
+    curl -v -k https://$1 >> 443sitecurl
+    curl -v -k https://$1/robots.txt >> 443robots.txt
+    echo "▓█ Curl complete" >> plog
     echo "▓█ HTTPS Found Running Nikto & Gobuster" >> plog
     nikto -h -ssl $1 | tee niktoscan
     gobuster -w gobuster -w /usr/share/dirbuster/wordlists/directory-list-lowercase-2.3-medium.txt -u https://$1 -o gobustlist_443.txt -k 
     echo "▓█ GoBuster complete" >> plog
-    curl -v -k https://$1 >> 443sitecurl
-    curl -v -k https://$1/robots.txt >> 443robots.txt
-    echo "▓█ Curl complete" >> plog
 fi
 if [[ -n $(grep "161/open" intense.gnmap) ]]
 then
