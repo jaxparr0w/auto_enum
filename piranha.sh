@@ -23,7 +23,7 @@ echo " "
 echo "▓█ Running Intense scan" >> plog
 echo " "
 # Run Intense scan 
-nmap -v -A -sU -sT -oA intense $1
+nmap -v -A -oA intense $1
 echo "▓█ Intense scan complete" >> plog
 
 echo " "
@@ -96,6 +96,12 @@ then
     snmpwalk -c public -v1 $1 1.3.6.1.2.1.6.13.1.3 >> snmpenum
     echo "▓█ SNMPWalk complete" >> plog
 fi
+echo " "
+echo "▓█ Running Intense UDP scan" >> plog
+echo " "
+# Run Intense scan 
+nmap -v -A -sU -oA intenseUDP $1
+echo "▓█ Intense UDP scan complete" >> plog
 #TODO :: Add FTP Brute force
 #if [[ -n $(grep "21/open" intense.gnmap) ]]
 #then    
