@@ -119,8 +119,8 @@ nmap -v -p 1-65355 -T4 -sT -oA fullTCP $1
 zenity --info --text="$1 Full TCP Scan Complete"
 echo "▓█ [x] Full TCP scan complete" >> plog
 echo " "
-echo "▓█ Running Intense UDP scan..." >> plog
+echo "▓█ Running Full UDP scan..." >> plog
 echo " "
 # Run Intense scan 
-nmap -v -A -sU -p 1-65535 -oA fullUDP $1
-echo "▓█ [x] Intense UDP scan complete" >> plog
+nmap -v -sU -p 1-65535 -T3 -oA fullUDP $1
+echo "▓█ [x] Full UDP scan complete" >> plog
