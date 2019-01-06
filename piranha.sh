@@ -53,8 +53,9 @@ then
     enum4linux -a $1 | tee enum4linuxscan 
     echo "▓█ [x] Enum4Linux complete" >> plog
     echo "▓█ SMB Found Running CrackMapExec..." >> plog
-    crackmapexec smb $1 -u '' -p '' >> crackmapexec_smb
-    echo "▓█ [x] CrackmapExec SMB Complete" >> plog
+    smbmap -H $1 -L | tee smbmap_shares
+    smbmap -H $1 -R | tee smbmap_rcrsv
+    echo "▓█ [x] SMBMAP Complete" >> plog
 fi
 
 # If 80 or 8080 is open, run nikto and gobuster
