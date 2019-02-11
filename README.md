@@ -16,11 +16,14 @@ Current Tools incorporated and port that triggers the tool. Reports are automati
 
 | Tool | Port Trigger | Output Report |
 |------------| ------------| -----------|
+| nmap intense scan | * | intense.(allformats) |
+| searchsploit | nmap report | sploitlist |
 | enum4linux | 137,445 | enum4linuxscan |
 | SMBMap | 445 | smbmap_* | 
 | gobuster | 80, 8080, 443 | gobustlist.txt |
 | nikto | 80, 8080, 443 | niktoscan |
 | snmpwalk | 161 | snmpenum | 
+| nmap full udp scan | * | fullUDP.(all formats) |
 
 Produces a log `plog` that shows status of each tool being run. Currently a serial process, iterates through each tool one at a time, plan to multithread in the future. 
   
