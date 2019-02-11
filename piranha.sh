@@ -1,9 +1,9 @@
 #!/bin/bash
 # Piranha :: Initial Enumeration Script
 # Author :: jaxparr0w 
-# v2 :: 12/19/2018
+# v2 :: 02/11/2018
 # Dependencies: nmap, nikto, enum4linux, gobuster, crackmapexec, snmpwalk
-# Basically an updted rolling Kali image
+# Basically an updated rolling Kali image
 
 echo "                                                              "
 echo "  ██▓███   ██▓ ██▀███   ▄▄▄       ███▄    █  ██░ ██  ▄▄▄      "
@@ -52,7 +52,7 @@ then
     echo "▓█ SMB Found Running Enum4Linux..." >> plog
     enum4linux -a $1 | tee enum4linuxscan 
     echo "▓█ [x] Enum4Linux complete" >> plog
-    echo "▓█ SMB Found Running CrackMapExec..." >> plog
+    echo "▓█ SMB Found Running SMBMap" >> plog
     smbmap -H $1 -L | tee smbmap_shares
     smbmap -H $1 -R | tee smbmap_rcrsv
     echo "▓█ [x] SMBMAP Complete" >> plog
