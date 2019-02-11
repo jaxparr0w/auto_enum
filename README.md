@@ -17,7 +17,7 @@ Current Tools incorporated and port that triggers the tool. Reports are automati
 | Tool | Port Trigger | Output Report |
 |------------| ------------| -----------|
 | enum4linux | 137,445 | enum4linuxscan |
-| crackmapexec | 445 | crackmapexec_smb | 
+| SMBMap | 445 | smbmap_* | 
 | gobuster | 80, 8080, 443 | gobustlist.txt |
 | nikto | 80, 8080, 443 | niktoscan |
 | snmpwalk | 161 | snmpenum | 
